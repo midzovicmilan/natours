@@ -14,7 +14,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const cookieParser = require('cookie-parser');
-//start express app
+//start express app with express()
 const app = express();
 
 //set template engine za rendering, ne treba require, express interno importije template
