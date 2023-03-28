@@ -8,7 +8,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) Get the currently booked tour
   const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
   const tour = await Tour.findById(req.params.tourId);
-  console.log(tour);
+  //console.log(tour);
 
   // 2) Create checkout session
   const session = await stripe.checkout.sessions.create({
@@ -49,7 +49,7 @@ exports.createBookingCheckout = catchAsync(async (req, res, next) => {
 
   if (!tour || !user || !price) return next();
   await Booking.create({ tour, user, price });
-  console.log(tour, user, price);
+  // console.log(tour, user, price);
   res.redirect(req.originalUrl.split('?')[0]);
 });
 

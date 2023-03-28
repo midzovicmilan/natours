@@ -71,7 +71,7 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
       },
     },
   ]);
-  console.log(stats);
+  //console.log(stats);
   //izvrsavamo kod samo ako imamo stats
   if (stats.length > 0) {
     // updajtujemo turu sa reviews
@@ -112,7 +112,7 @@ reviewSchema.pre(/^findOneAnd/, async function (next) {
   // tourId prebacjuemo iz pre middleware u post middleware preko this.r
   this.review = await this.clone().findOne();
 
-  console.log(this.review);
+  //console.log(this.review);
 });
 // moramo post metodu da pravimo jer pre middleware nema pristup queriju jer je vec izvrsen
 reviewSchema.post(/^findOneAnd/, async function () {

@@ -3,8 +3,8 @@ const dotenv = require('dotenv');
 
 // uncaught exception treba staviti gore na vrh da bi uhvatio kod posle ove funkcije
 process.on('uncaughtException', (err) => {
-  console.log(err.name, err.message);
-  console.log('Uncaught exception, shutting down');
+  //console.log(err.name, err.message);
+  //console.log('Uncaught exception, shutting down');
 
   process.exit(1);
 });
@@ -21,7 +21,7 @@ main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(DB);
   //console.log(mongoose.connection);
-  console.log('DB connected');
+  //console.log('DB connected');
 }
 
 // pravimo model na osnovu sheme
@@ -47,7 +47,7 @@ const server = app.listen(port, () => {
 });
 // unhandled rejection
 process.on('unhandledRejection', (err) => {
-  console.log(err.name, err.message);
-  console.log('Unhandled rejection, shutting down');
+  //console.log(err.name, err.message);
+  //console.log('Unhandled rejection, shutting down');
   process.exit;
 });

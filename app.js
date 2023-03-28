@@ -14,6 +14,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 //start express app with express()
 const app = express();
 
@@ -79,6 +80,8 @@ app.use(
     ],
   })
 );
+//kompresovanje tektsa koji se salje klijentu kroz request
+app.use(compression());
 
 //Test middleware
 app.use((req, res, next) => {
