@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon server.js",
+    "dev": "node server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js",
     "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
@@ -41,5 +42,8 @@
   },
   "devDependencies": {
     "parcel-bundler": "^1.8.1"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }
