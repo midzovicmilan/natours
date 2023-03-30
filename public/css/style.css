@@ -292,14 +292,6 @@ body {
   align-items: center;
 }
 @media only screen and (max-width: 62.5em) {
-  .card-container {
-    min-width: 92%;
-    display: flex;
-  }
-  .card {
-    min-width: 90%;
-    background-color: red;
-  }
   .header {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -888,10 +880,20 @@ body {
 .nav__el:not(:last-child) {
   margin-right: 3rem;
 }
-@media only screen and (max-width: 37.5em) {
+@media only screen and (max-width: 640px) {
   .nav__el:not(:last-child) {
     margin-right: 0;
     margin-bottom: 1.2rem;
+  }
+  .card-container {
+    width: 100%;
+    grid-template-columns: 12fr !important;
+  }
+}
+@media only screen and (min-width: 541px) and(max-width:768px) {
+  .card-container {
+    width: 100%;
+    grid-template-columns: 6fr !important;
   }
 }
 .nav__el:focus {
