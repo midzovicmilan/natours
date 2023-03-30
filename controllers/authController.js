@@ -14,7 +14,7 @@ const signToken = (id) => {
 };
 // kreiranje cookia
 
-const createSendToken = (user, statusCode, res) => {
+const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
   const cookieOptions = {
     expires: new Date(
@@ -22,8 +22,8 @@ const createSendToken = (user, statusCode, res) => {
         parseInt(process.env.JWT_COOKIE_EXPIRES_IN) * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
+    secure: req.secure,
   };
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
   // saljemo cookie
   res.cookie('jwt', token, cookieOptions);
 
@@ -54,7 +54,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   console.log(url);
   await new Email(newUser, url).sendWelcome();
   // payload for creating token
-  createSendToken(newUser, 201, res);
+  createSendToken(newUser, 201, req, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -80,7 +80,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   //3) If everything is ok, send token to client
-  createSendToken(user, 200, res);
+  createSendToken(user, 200, req, res);
 });
 
 // Logout funkcija koja salje siguran cookiee
@@ -264,7 +264,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   //4)Log in user, send JWT to client
 
-  createSendToken(user, 200, res);
+  createSendToken(user, 200, req, res);
 });
 
 //update password
@@ -287,7 +287,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   //presave middlewari nece da rade posle update, tj nece biti enkripovan password i nece raditi timestamp middleware
 
   //4)Log user in, send JWT
-  createSendToken(user, 200, res);
+  createSendToken(user, 200, req, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -306,5 +306,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // User.findByIdAndUpdate will NOT work as intended!
 
   // 4) Log user in, send JWT
-  createSendToken(user, 200, res);
+  createSendToken(user, 200, req, res);
 });

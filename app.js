@@ -15,11 +15,13 @@ const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 //start express app with express()
 const app = express();
 
 //set template engine za rendering, ne treba require, express interno importije template
-
+//app trust proxy for deployment, read https
+app.enable('trust proxy');
 app.set('view engine', 'pug');
 // spajamo dirname root folder sa views pomocu path modula
 // stavljamo path.join jer ne znamo da li imamo / ili ne, express automatski prepozna
@@ -30,6 +32,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 require('dotenv').config();
 
+//Implement CORS
+app.use(cors());
+// Access-Control-Allow-Origin, frontend natours.com eample
+/* ap.use(cors({
+  origin:"https://www.natours.com"
+}))
+ */
+//http method options for preflight phase
+//Complet request cors set example "/api/v1/tours/:id"
+app.options('*', cors());
+//app.options(""/api/v1/tours/:id", cors())
 //1) GLOBAL MIDLEWARES
 //Set Security HTTP headers
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
